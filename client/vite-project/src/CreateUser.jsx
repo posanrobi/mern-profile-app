@@ -1,11 +1,14 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { createUser } from "./api";
+import { useNavigate } from "react-router-dom";
 
 const CreateUser = () => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,8 +21,12 @@ const CreateUser = () => {
       setAge("");
       setEmail("");
     } catch (error) {
-      console.error("Error creating user:", error.response.data);
+      console.error("Error creating user:", error.message);
     }
+  };
+
+  const handleClick = () => {
+    navigate("/");
   };
 
   return (
@@ -51,6 +58,9 @@ const CreateUser = () => {
         />
         <Button type="submit" variant="contained" color="primary">
           Create
+        </Button>
+        <Button onClick={handleClick} variant="contained" color="primary">
+          Back to users
         </Button>
       </form>
     </>
