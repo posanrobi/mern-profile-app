@@ -1,4 +1,14 @@
-import { Button, TextField, Typography, CircularProgress } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Typography,
+  CircularProgress,
+  RadioGroup,
+  FormLabel,
+  FormControlLabel,
+  Radio,
+  FormControl,
+} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser, getUserById } from "./api";
 import { useState, useEffect } from "react";
@@ -9,6 +19,7 @@ const EditUser = () => {
     name: "",
     age: "",
     email: "",
+    gender: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,6 +34,7 @@ const EditUser = () => {
             name: currentUser.name,
             age: currentUser.age,
             email: currentUser.email,
+            gender: currentUser.gender,
           });
         }
       } catch (error) {
@@ -80,6 +92,29 @@ const EditUser = () => {
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
+        <FormControl fullWidth>
+          <RadioGroup
+            value={user.gender}
+            onChange={(e) => setUser({ ...user, gender: e.target.value })}
+          >
+            <FormLabel component="legend">Gender</FormLabel>
+            <FormControlLabel
+              value="male"
+              control={<Radio color="primary" />}
+              label="Male"
+            />
+            <FormControlLabel
+              value="female"
+              control={<Radio color="primary" />}
+              label="Female"
+            />
+            <FormControlLabel
+              value="other"
+              control={<Radio color="primary" />}
+              label="Other"
+            />
+          </RadioGroup>
+        </FormControl>
         <Button type="submit" variant="contained">
           Save
         </Button>

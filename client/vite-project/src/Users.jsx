@@ -11,6 +11,7 @@ import { deleteUser, fetchUsers } from "./api";
 import { useNavigate } from "react-router-dom";
 import { TbTrashXFilled } from "react-icons/tb";
 import { RiEdit2Fill } from "react-icons/ri";
+import Statistics from "./Statistics";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -63,6 +64,14 @@ const Users = () => {
             <Typography variant="body2" color="textSecondary">
               Email: {user.email}
             </Typography>
+            <Typography variant="body2" color="textSecondary">
+              Gender:{" "}
+              {user.gender === "male"
+                ? "Male"
+                : user.gender === "female"
+                ? "Female"
+                : "Other"}
+            </Typography>
             <IconButton
               onClick={() => handleEditUser(user._id)}
               sx={{
@@ -105,6 +114,7 @@ const Users = () => {
       <Button onClick={handleClick} variant="contained" color="primary">
         Create a new user
       </Button>
+      <Statistics />
     </>
   );
 };

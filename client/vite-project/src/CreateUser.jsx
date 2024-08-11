@@ -1,4 +1,15 @@
-import { Button, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+  FormControl,
+  FormLabel,
+  Box,
+  Container,
+} from "@mui/material";
 import { useState } from "react";
 import { createUser } from "./api";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +18,7 @@ const CreateUser = () => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
@@ -17,6 +29,7 @@ const CreateUser = () => {
     if (!name) tempErrors.name = "Name is required";
     if (!age) tempErrors.age = "Age is required";
     if (!email) tempErrors.email = "Email is required";
+    if (!gender) tempErrors.gender = "Gender is required";
 
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
@@ -25,7 +38,7 @@ const CreateUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = { name, age: parseInt(age), email };
+    const user = { name, age: parseInt(age), email, gender };
 
     try {
       if (validate()) {
@@ -33,6 +46,7 @@ const CreateUser = () => {
         setName("");
         setAge("");
         setEmail("");
+        setGender("");
       }
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -44,7 +58,7 @@ const CreateUser = () => {
   };
 
   return (
-    <>
+    <Container maxWidth="sm">
       <Typography variant="h4" component="h2">
         Create User
       </Typography>
@@ -58,6 +72,36 @@ const CreateUser = () => {
           error={!!errors.name}
           helperText={errors.name}
         />
+        <FormControl component="fieldset" error={!!errors.gender} fullWidth>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "2rem",
+            }}
+          >
+            <FormLabel component="legend">Gender</FormLabel>
+            <RadioGroup
+              aria-label="gender"
+              name="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              row
+            >
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel
+                value="female"
+                control={<Radio />}
+                label="Female"
+              />
+              <FormControlLabel
+                value="other"
+                control={<Radio />}
+                label="Other"
+              />
+            </RadioGroup>
+          </Box>
+        </FormControl>
         <TextField
           label="Age"
           value={age}
@@ -83,7 +127,7 @@ const CreateUser = () => {
           Back to users
         </Button>
       </form>
-    </>
+    </Container>
   );
 };
 
