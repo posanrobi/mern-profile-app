@@ -5,6 +5,8 @@ import {
   ListItem,
   ListItemText,
   Typography,
+  Container,
+  Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { deleteUser, fetchUsers } from "./api";
@@ -47,9 +49,20 @@ const Users = () => {
   };
 
   return (
-    <>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Typography variant="h4">Users</Typography>
-      <List>
+      <List
+        sx={{
+          width: "50rem",
+        }}
+      >
         {users.map((user) => (
           <ListItem
             key={user._id}
@@ -61,17 +74,26 @@ const Users = () => {
             }}
           >
             <ListItemText primary={user.name} secondary={`Age: ${user.age}`} />
-            <Typography variant="body2" color="textSecondary">
-              Email: {user.email}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              Gender:{" "}
-              {user.gender === "male"
-                ? "Male"
-                : user.gender === "female"
-                ? "Female"
-                : "Other"}
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                gap: 6,
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              <Typography variant="body2" color="textSecondary">
+                Email: {user.email}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Gender:{" "}
+                {user.gender === "male"
+                  ? "Male"
+                  : user.gender === "female"
+                  ? "Female"
+                  : "Other"}
+              </Typography>
+            </Box>
             <IconButton
               onClick={() => handleEditUser(user._id)}
               sx={{
@@ -115,7 +137,7 @@ const Users = () => {
         Create a new user
       </Button>
       <Statistics />
-    </>
+    </Container>
   );
 };
 

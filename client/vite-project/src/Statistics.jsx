@@ -42,7 +42,7 @@ const Statistics = () => {
           sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}
         >
           <Typography variant="h5" margin="2rem 0 0 0">
-            Group users by age
+            Group by age
           </Typography>
           <BarChart
             xAxis={[
