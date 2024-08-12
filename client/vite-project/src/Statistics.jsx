@@ -37,11 +37,22 @@ const Statistics = () => {
 
   return (
     <>
-      <Container sx={{ display: "flex" }}>
+      <Container
+        sx={{
+          display: "flex",
+          backgroundColor: "#fff",
+          borderRadius: "1rem",
+          marginTop: "2rem",
+        }}
+      >
         <Container
-          sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}
+          sx={{
+            display: "flex",
+            gap: "1rem",
+            flexDirection: "column",
+          }}
         >
-          <Typography variant="h5" margin="2rem 0 0 0">
+          <Typography variant="h5" margin="2rem 0 0 0" color="#000">
             Group by age
           </Typography>
           <BarChart
@@ -60,7 +71,7 @@ const Statistics = () => {
         <Container
           sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}
         >
-          <Typography variant="h5" margin="2rem 0 0 0">
+          <Typography variant="h5" margin="2rem 0 0 0" color="#000">
             Group by gender
           </Typography>
           <PieChart

@@ -68,12 +68,17 @@ const Users = () => {
             key={user._id}
             sx={{
               border: "1px solid #000",
+              backgroundColor: "#fff",
               marginBottom: 1,
               padding: 1,
               borderRadius: 3,
             }}
           >
-            <ListItemText primary={user.name} secondary={`Age: ${user.age}`} />
+            <ListItemText
+              primary={user.name}
+              secondary={`Age: ${user.age}`}
+              primaryTypographyProps={{ sx: { color: "#000" } }}
+            />
             <Box
               sx={{
                 display: "flex",
@@ -83,7 +88,7 @@ const Users = () => {
               }}
             >
               <Typography variant="body2" color="textSecondary">
-                Email: {user.email}
+                {user.email}
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 Gender:{" "}
@@ -99,6 +104,7 @@ const Users = () => {
               sx={{
                 marginLeft: 10,
                 "&:hover": {
+                  color: "darkgrey",
                   backgroundColor: "transparent",
                 },
                 "&:focus": {

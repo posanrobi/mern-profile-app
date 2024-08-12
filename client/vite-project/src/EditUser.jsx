@@ -8,6 +8,7 @@ import {
   FormControlLabel,
   Radio,
   FormControl,
+  Box,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser, getUserById } from "./api";
@@ -76,6 +77,32 @@ const EditUser = () => {
           value={user.name}
           onChange={(e) => setUser({ ...user, name: e.target.value })}
         />
+        <FormControl fullWidth>
+          <Box sx={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+            <FormLabel component="legend">Gender</FormLabel>
+            <RadioGroup
+              value={user.gender}
+              onChange={(e) => setUser({ ...user, gender: e.target.value })}
+              row
+            >
+              <FormControlLabel
+                value="male"
+                control={<Radio color="primary" />}
+                label="Male"
+              />
+              <FormControlLabel
+                value="female"
+                control={<Radio color="primary" />}
+                label="Female"
+              />
+              <FormControlLabel
+                value="other"
+                control={<Radio color="primary" />}
+                label="Other"
+              />
+            </RadioGroup>
+          </Box>
+        </FormControl>
         <TextField
           label="Age"
           variant="outlined"
@@ -92,29 +119,7 @@ const EditUser = () => {
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
-        <FormControl fullWidth>
-          <RadioGroup
-            value={user.gender}
-            onChange={(e) => setUser({ ...user, gender: e.target.value })}
-          >
-            <FormLabel component="legend">Gender</FormLabel>
-            <FormControlLabel
-              value="male"
-              control={<Radio color="primary" />}
-              label="Male"
-            />
-            <FormControlLabel
-              value="female"
-              control={<Radio color="primary" />}
-              label="Female"
-            />
-            <FormControlLabel
-              value="other"
-              control={<Radio color="primary" />}
-              label="Other"
-            />
-          </RadioGroup>
-        </FormControl>
+
         <Button type="submit" variant="contained">
           Save
         </Button>
