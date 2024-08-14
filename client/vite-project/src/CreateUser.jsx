@@ -58,8 +58,11 @@ const CreateUser = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" component="h2">
+    <Container
+      maxWidth="sm"
+      sx={{ background: "white", padding: "1rem", borderRadius: "0.5rem" }}
+    >
+      <Typography variant="h4" component="h2" color="black">
         Create User
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -78,6 +81,7 @@ const CreateUser = () => {
               display: "flex",
               alignItems: "center",
               gap: "2rem",
+              color: "black",
             }}
           >
             <FormLabel component="legend">Gender</FormLabel>
@@ -120,12 +124,22 @@ const CreateUser = () => {
           error={!!errors.email}
           helperText={errors.email}
         />
-        <Button type="submit" variant="contained" color="primary">
-          Create
-        </Button>
-        <Button onClick={handleClick} variant="contained" color="primary">
-          Back to users
-        </Button>
+        <Box sx={{ display: "flex", gap: "1.5rem", justifyContent: "center" }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ background: "#585151", "&:hover": { background: "#484141" } }}
+          >
+            Create
+          </Button>
+          <Button
+            onClick={handleClick}
+            variant="contained"
+            sx={{ background: "#585151", "&:hover": { background: "#484141" } }}
+          >
+            Back to users
+          </Button>
+        </Box>
       </form>
     </Container>
   );

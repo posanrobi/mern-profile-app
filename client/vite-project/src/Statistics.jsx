@@ -41,7 +41,7 @@ const Statistics = () => {
         sx={{
           display: "flex",
           backgroundColor: "#fff",
-          borderRadius: "1rem",
+          borderRadius: "0.5rem",
           marginTop: "2rem",
         }}
       >

@@ -9,6 +9,7 @@ import {
   Radio,
   FormControl,
   Box,
+  Container,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { editUser, getUserById } from "./api";
@@ -66,8 +67,13 @@ const EditUser = () => {
   if (error) return <Typography color="error">Error: {error}</Typography>;
 
   return (
-    <>
-      <Typography variant="h4">Edit User</Typography>
+    <Container
+      maxWidth="sm"
+      sx={{ background: "white", padding: "1rem", borderRadius: "0.5rem" }}
+    >
+      <Typography variant="h4" color="black">
+        Edit User
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           label="Name"
@@ -78,7 +84,14 @@ const EditUser = () => {
           onChange={(e) => setUser({ ...user, name: e.target.value })}
         />
         <FormControl fullWidth>
-          <Box sx={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "2rem",
+              alignItems: "center",
+              color: "black",
+            }}
+          >
             <FormLabel component="legend">Gender</FormLabel>
             <RadioGroup
               value={user.gender}
@@ -120,14 +133,24 @@ const EditUser = () => {
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
 
-        <Button type="submit" variant="contained">
-          Save
-        </Button>
-        <Button onClick={handleClick} variant="contained">
-          Back
-        </Button>
+        <Box sx={{ display: "flex", justifyContent: "center", gap: "1.5rem" }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ background: "#585151", "&:hover": { background: "#484141" } }}
+          >
+            Save
+          </Button>
+          <Button
+            onClick={handleClick}
+            variant="contained"
+            sx={{ background: "#585151", "&:hover": { background: "#484141" } }}
+          >
+            Back
+          </Button>
+        </Box>
       </form>
-    </>
+    </Container>
   );
 };
 
