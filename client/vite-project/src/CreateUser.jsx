@@ -12,16 +12,16 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { createUser } from "./api";
-import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const CreateUser = () => {
+const CreateUser = ({ setIsCreatingUser }) => {
+  CreateUser.propTypes = { setIsCreatingUser: PropTypes.func.isRequired };
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [errors, setErrors] = useState({});
-
-  const navigate = useNavigate();
 
   const validate = () => {
     let tempErrors = {};
@@ -51,10 +51,6 @@ const CreateUser = () => {
     } catch (error) {
       console.error("Error creating user:", error.message);
     }
-  };
-
-  const handleClick = () => {
-    navigate("/");
   };
 
   return (
@@ -133,7 +129,7 @@ const CreateUser = () => {
             Create
           </Button>
           <Button
-            onClick={handleClick}
+            onClick={() => setIsCreatingUser(false)}
             variant="contained"
             sx={{ background: "#585151", "&:hover": { background: "#484141" } }}
           >

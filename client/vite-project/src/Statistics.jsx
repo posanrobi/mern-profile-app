@@ -64,8 +64,8 @@ const Statistics = () => {
               },
             ]}
             series={[{ data: users.map((user) => user.age), label: "Age" }]}
-            width={500}
-            height={400}
+            width={400}
+            height={300}
           />
         </Container>
         <Container
@@ -76,8 +76,8 @@ const Statistics = () => {
           </Typography>
           <PieChart
             series={[{ data: pieChartData }]}
-            width={400}
-            height={300}
+            width={300}
+            height={200}
           />
         </Container>
       </Container>
