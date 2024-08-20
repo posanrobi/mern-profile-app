@@ -40,9 +40,13 @@ const Statistics = () => {
       <Container
         sx={{
           display: "flex",
+          flexDirection: "column",
           backgroundColor: "#fff",
           borderRadius: "0.5rem",
           marginTop: "2rem",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "25rem",
         }}
       >
         <Container
@@ -50,9 +54,10 @@ const Statistics = () => {
             display: "flex",
             gap: "1rem",
             flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Typography variant="h5" margin="2rem 0 0 0" color="#000">
+          <Typography variant="h5" margin="1rem 0 0 0" color="#000">
             Group by age
           </Typography>
           <BarChart
@@ -65,19 +70,24 @@ const Statistics = () => {
             ]}
             series={[{ data: users.map((user) => user.age), label: "Age" }]}
             width={400}
-            height={300}
+            height={200}
           />
         </Container>
         <Container
-          sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}
+          sx={{
+            display: "flex",
+            gap: "1rem",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
-          <Typography variant="h5" margin="2rem 0 0 0" color="#000">
+          <Typography variant="h5" margin="1rem 0 0 0" color="#000">
             Group by gender
           </Typography>
           <PieChart
             series={[{ data: pieChartData }]}
-            width={300}
-            height={200}
+            width={250}
+            height={150}
           />
         </Container>
       </Container>

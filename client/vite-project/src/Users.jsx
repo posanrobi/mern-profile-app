@@ -51,10 +51,9 @@ const Users = () => {
     <Container
       sx={{
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "space-around",
+        gap: "2rem",
         alignItems: "center",
-        height: "100vh",
       }}
     >
       {isCreatingUser ? (
@@ -63,12 +62,14 @@ const Users = () => {
         <Box
           sx={{ background: "#fff", padding: "1rem", borderRadius: "0.5rem" }}
         >
-          <Typography variant="h4" color="#000">
-            Users
-          </Typography>
           <List
             sx={{
-              width: "50rem",
+              width: "37rem",
+              minHeight: "25em",
+              display: "flex",
+              justifyContent: "felx-start",
+              flexWrap: "wrap",
+              gap: "1rem",
             }}
           >
             {users.map((user) => (
@@ -76,15 +77,19 @@ const Users = () => {
                 key={user._id}
                 sx={{
                   backgroundColor: "#f1f1f1",
-                  marginBottom: 1,
                   padding: 1,
                   borderRadius: 3,
+                  width: "18rem",
+                  height: "8rem",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <ListItemText
-                  primary={user.name}
-                  secondary={`Age: ${user.age}`}
-                  primaryTypographyProps={{ sx: { color: "#000" } }}
+                  primary={`${user.name} (${user.age})`}
+                  primaryTypographyProps={{
+                    sx: { color: "#000", width: "100%", textAlign: "center" },
+                  }}
                 />
                 <Box
                   sx={{
@@ -92,14 +97,14 @@ const Users = () => {
                     justifyContent: "space-between",
                     alignItems: "center",
                     width: "100%",
-                    maxWidth: "20rem",
+                    maxWidth: "15rem",
                   }}
                 >
                   <Typography variant="body2" color="textSecondary">
                     {user.email}
                   </Typography>
 
-                  <Box sx={{ width: "7rem", textAlign: "left" }}>
+                  <Box>
                     <Typography variant="body2" color="textSecondary">
                       Gender:{" "}
                       {user.gender === "male"
@@ -110,42 +115,49 @@ const Users = () => {
                     </Typography>
                   </Box>
                 </Box>
-                <IconButton
-                  onClick={() => handleEditUser(user._id)}
+                <Box
                   sx={{
-                    marginLeft: 10,
-                    "&:hover": {
-                      color: "darkgrey",
-                      backgroundColor: "transparent",
-                    },
-                    "&:focus": {
-                      outline: "none",
-                    },
-                    "&:active": {
-                      boxShadow: "none",
-                    },
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "100%",
                   }}
                 >
-                  <RiEdit2Fill />
-                </IconButton>
-                <IconButton
-                  onClick={() => handleDeleteUser(user._id)}
-                  sx={{
-                    color: "red",
-                    "&:hover": {
-                      color: "darkred",
-                      backgroundColor: "transparent",
-                    },
-                    "&:focus": {
-                      outline: "none",
-                    },
-                    "&:active": {
-                      boxShadow: "none",
-                    },
-                  }}
-                >
-                  <TbTrashXFilled />
-                </IconButton>
+                  <IconButton
+                    onClick={() => handleEditUser(user._id)}
+                    sx={{
+                      "&:hover": {
+                        color: "darkgrey",
+                        backgroundColor: "transparent",
+                      },
+                      "&:focus": {
+                        outline: "none",
+                      },
+                      "&:active": {
+                        boxShadow: "none",
+                      },
+                    }}
+                  >
+                    <RiEdit2Fill />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => handleDeleteUser(user._id)}
+                    sx={{
+                      color: "red",
+                      "&:hover": {
+                        color: "darkred",
+                        backgroundColor: "transparent",
+                      },
+                      "&:focus": {
+                        outline: "none",
+                      },
+                      "&:active": {
+                        boxShadow: "none",
+                      },
+                    }}
+                  >
+                    <TbTrashXFilled />
+                  </IconButton>
+                </Box>
               </ListItem>
             ))}
           </List>
@@ -153,7 +165,11 @@ const Users = () => {
           <Button
             onClick={() => setIsCreatingUser(true)}
             variant="contained"
-            sx={{ background: "#585151", "&:hover": { background: "#484141" } }}
+            sx={{
+              background: "#585151",
+              marginTop: "1rem",
+              "&:hover": { background: "#484141" },
+            }}
           >
             Create a new user
           </Button>
