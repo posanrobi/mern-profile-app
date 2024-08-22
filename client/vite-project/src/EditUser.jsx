@@ -11,12 +11,16 @@ import {
   Box,
   Container,
 } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
 import { editUser, getUserById } from "./api";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
-const EditUser = () => {
-  const { id } = useParams();
+const EditUser = ({ setIsEditingUser, userId }) => {
+  EditUser.propTypes = {
+    setIsEditingUser: PropTypes.func.isRequired,
+    userId: PropTypes.string.isRequired,
+  };
+
   const [user, setUser] = useState({
     name: "",
     age: "",
@@ -25,12 +29,11 @@ const EditUser = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const currentUser = await getUserById(id);
+        const currentUser = await getUserById(userId);
         if (currentUser) {
           setUser({
             name: currentUser.name,
@@ -47,17 +50,16 @@ const EditUser = () => {
       }
     };
     fetchUser();
-  }, [id]);
+  }, [userId]);
 
   const handleClick = () => {
-    navigate("/");
+    setIsEditingUser(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await editUser(id, user);
-      navigate("/");
+      await editUser(userId, user);
     } catch (err) {
       console.error("Error while updating user: ", err.message);
     }
@@ -135,6 +137,7 @@ const EditUser = () => {
 
         <Box sx={{ display: "flex", justifyContent: "center", gap: "1.5rem" }}>
           <Button
+            onClick={() => setIsEditingUser(false)}
             type="submit"
             variant="contained"
             sx={{ background: "#585151", "&:hover": { background: "#484141" } }}

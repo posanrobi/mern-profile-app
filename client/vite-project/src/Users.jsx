@@ -10,17 +10,17 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { deleteUser, fetchUsers } from "./api";
-import { useNavigate } from "react-router-dom";
 import { TbTrashXFilled } from "react-icons/tb";
 import { RiEdit2Fill } from "react-icons/ri";
 import Statistics from "./Statistics";
 import CreateUser from "./CreateUser";
+import EditUser from "./EditUser";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [isCreatingUser, setIsCreatingUser] = useState(false);
   const [isEditingUser, setIsEditingUser] = useState(false);
-  const navigate = useNavigate();
+  const [editingUserId, setEditingUserId] = useState(null);
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -44,7 +44,8 @@ const Users = () => {
   };
 
   const handleEditUser = (id) => {
-    navigate(`/edituser/${id}`);
+    setEditingUserId(id);
+    setIsEditingUser(true);
   };
 
   return (
@@ -56,7 +57,9 @@ const Users = () => {
         alignItems: "center",
       }}
     >
-      {isCreatingUser ? (
+      {isEditingUser ? (
+        <EditUser setIsEditingUser={setIsEditingUser} userId={editingUserId} />
+      ) : isCreatingUser ? (
         <CreateUser setIsCreatingUser={setIsCreatingUser} />
       ) : (
         <Box
@@ -66,7 +69,6 @@ const Users = () => {
             borderRadius: "0.5rem",
             minHeight: "30rem",
             width: "38rem",
-
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -79,7 +81,6 @@ const Users = () => {
               overflow: "auto",
               overflowX: "none",
               padding: "0 1rem 0 1rem",
-
               display: "grid",
               gridTemplateColumns:
                 users.length === 0 ? "unset" : "repeat(2, 1fr)",
@@ -130,7 +131,6 @@ const Users = () => {
                     <Typography variant="body2" color="textSecondary">
                       {user.email}
                     </Typography>
-
                     <Box>
                       <Typography variant="body2" color="textSecondary">
                         Gender:{" "}
