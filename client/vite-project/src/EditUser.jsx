@@ -15,10 +15,11 @@ import { editUser, getUserById } from "./api";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const EditUser = ({ setIsEditingUser, userId }) => {
+const EditUser = ({ setIsEditingUser, userId, onUserUpdated }) => {
   EditUser.propTypes = {
     setIsEditingUser: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired,
+    onUserUpdated: PropTypes.func.isRequired,
   };
 
   const [user, setUser] = useState({
@@ -59,7 +60,9 @@ const EditUser = ({ setIsEditingUser, userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await editUser(userId, user);
+      const editedUser = await editUser(userId, user);
+      onUserUpdated(editedUser);
+      setIsEditingUser(false);
     } catch (err) {
       console.error("Error while updating user: ", err.message);
     }
@@ -137,7 +140,6 @@ const EditUser = ({ setIsEditingUser, userId }) => {
 
         <Box sx={{ display: "flex", justifyContent: "center", gap: "1.5rem" }}>
           <Button
-            onClick={() => setIsEditingUser(false)}
             type="submit"
             variant="contained"
             sx={{ background: "#585151", "&:hover": { background: "#484141" } }}

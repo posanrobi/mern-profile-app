@@ -28,7 +28,7 @@ const Users = () => {
       setUsers(data);
     };
     loadUsers();
-  }, [isCreatingUser]);
+  }, []);
 
   const handleDeleteUser = async (id) => {
     const prevUsers = [...users];
@@ -48,6 +48,20 @@ const Users = () => {
     setIsEditingUser(true);
   };
 
+  const handleUserCreated = (newUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+    setIsCreatingUser(false);
+  };
+
+  const handleUserUpdated = (updatedUser) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) =>
+        user._id === updatedUser._id ? updatedUser : user
+      )
+    );
+    setIsEditingUser(false);
+  };
+
   return (
     <Container
       sx={{
@@ -58,9 +72,16 @@ const Users = () => {
       }}
     >
       {isEditingUser ? (
-        <EditUser setIsEditingUser={setIsEditingUser} userId={editingUserId} />
+        <EditUser
+          setIsEditingUser={setIsEditingUser}
+          userId={editingUserId}
+          onUserUpdated={handleUserUpdated}
+        />
       ) : isCreatingUser ? (
-        <CreateUser setIsCreatingUser={setIsCreatingUser} />
+        <CreateUser
+          setIsCreatingUser={setIsCreatingUser}
+          onUserCreated={handleUserCreated}
+        />
       ) : (
         <Box
           sx={{

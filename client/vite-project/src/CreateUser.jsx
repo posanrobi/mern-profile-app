@@ -14,8 +14,11 @@ import { useState } from "react";
 import { createUser } from "./api";
 import PropTypes from "prop-types";
 
-const CreateUser = ({ setIsCreatingUser }) => {
-  CreateUser.propTypes = { setIsCreatingUser: PropTypes.func.isRequired };
+const CreateUser = ({ setIsCreatingUser, onUserCreated }) => {
+  CreateUser.propTypes = {
+    setIsCreatingUser: PropTypes.func.isRequired,
+    onUserCreated: PropTypes.func.isRequired,
+  };
 
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -42,7 +45,8 @@ const CreateUser = ({ setIsCreatingUser }) => {
 
     try {
       if (validate()) {
-        await createUser(user);
+        const createdUser = await createUser(user);
+        onUserCreated(createdUser);
         setName("");
         setAge("");
         setEmail("");
