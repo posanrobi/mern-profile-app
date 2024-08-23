@@ -14,7 +14,7 @@ const Statistics = () => {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [users]);
 
   const numberByGender = users.reduce(
     (acc, user) => {

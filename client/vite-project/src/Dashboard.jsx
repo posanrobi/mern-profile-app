@@ -16,7 +16,7 @@ import Statistics from "./Statistics";
 import CreateUser from "./CreateUser";
 import EditUser from "./EditUser";
 
-const Users = () => {
+const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [isCreatingUser, setIsCreatingUser] = useState(false);
   const [isEditingUser, setIsEditingUser] = useState(false);
@@ -229,4 +229,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Dashboard;
