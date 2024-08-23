@@ -16,6 +16,8 @@ import { RiEdit2Fill } from "react-icons/ri";
 import Statistics from "./Statistics";
 import CreateUser from "./CreateUser";
 import EditUser from "./EditUser";
+import { CgGenderMale, CgGenderFemale } from "react-icons/cg";
+import { RiGenderlessLine } from "react-icons/ri";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -143,39 +145,46 @@ const Dashboard = () => {
                       flexDirection: "column",
                     }}
                   >
-                    <ListItemText
-                      primary={`${user.name} (${user.age})`}
-                      primaryTypographyProps={{
-                        sx: {
-                          color: "#000",
-                          width: "100%",
-                          textAlign: "center",
-                        },
-                      }}
-                    />
                     <Box
                       sx={{
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
                         width: "100%",
+                      }}
+                    >
+                      <ListItemText
+                        primary={`${user.name} (${user.age})`}
+                        primaryTypographyProps={{
+                          sx: {
+                            color: "#000",
+                            textAlign: "left",
+                            marginLeft: "0.5rem",
+                          },
+                        }}
+                      />
+                      <Typography sx={{ fontSize: "2rem" }}>
+                        {user.gender === "male" ? (
+                          <CgGenderMale color="#5fa1c7" />
+                        ) : user.gender === "female" ? (
+                          <CgGenderFemale color="#cc7075" />
+                        ) : (
+                          <RiGenderlessLine color="#000" />
+                        )}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
                         maxWidth: "15rem",
+                        marginTop: "0.5rem",
                       }}
                     >
                       <Typography variant="body2" color="textSecondary">
                         {user.email}
                       </Typography>
-
-                      <Box>
-                        <Typography variant="body2" color="textSecondary">
-                          Gender:{" "}
-                          {user.gender === "male"
-                            ? "Male"
-                            : user.gender === "female"
-                            ? "Female"
-                            : "Other"}
-                        </Typography>
-                      </Box>
                     </Box>
 
                     <Box
